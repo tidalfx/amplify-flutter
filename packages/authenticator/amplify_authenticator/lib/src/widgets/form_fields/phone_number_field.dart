@@ -115,4 +115,7 @@ class _AuthenticatorPhoneFieldState<FieldType extends Enum>
         ObjectFlagProperty<ValueChanged<String>>.has('onChanged', onChanged),
       );
   }
+
+  @override
+  TextInputType get keyboardType => TextInputType.phone;
 }
