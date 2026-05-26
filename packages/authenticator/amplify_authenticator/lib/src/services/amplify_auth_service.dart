@@ -68,6 +68,7 @@ abstract class AuthService {
     required CognitoUserAttributeKey userAttributeKey,
     required String confirmationCode,
   });
+
   Future<AmplifyOutputs> waitForConfiguration();
 
   Future<void> rememberDevice();
@@ -97,6 +98,11 @@ class AmplifyAuthService
       () => Amplify.Auth.signIn(
         username: username,
         password: password,
+        options: const SignInOptions(
+          pluginOptions: CognitoSignInPluginOptions(
+            authFlowType: AuthenticationFlowType.userPasswordAuth,
+          ),
+        ),
       ),
     );
 
@@ -352,6 +358,7 @@ class GetAttributeVerificationStatusResult {
     required this.verifiedAttributes,
     required this.unverifiedAttributes,
   });
+
   final List<CognitoUserAttributeKey> verifiedAttributes;
   final List<CognitoUserAttributeKey> unverifiedAttributes;
 }
